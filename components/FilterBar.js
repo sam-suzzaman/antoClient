@@ -4,19 +4,10 @@ const FilterBar = () => {
     return (
         <ul className="menu">
             <li className="item">
-                <a href="#" className="link active">
-                    cat
-                </a>
+                <button className="link active">cat</button>
             </li>
             <li className="item">
-                <a href="#" className="link">
-                    bird
-                </a>
-            </li>
-            <li className="item">
-                <a href="#" className="link">
-                    fish
-                </a>
+                <button className="link">bird</button>
             </li>
         </ul>
     );
