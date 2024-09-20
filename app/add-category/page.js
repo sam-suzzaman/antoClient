@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const page = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const {
         register,
         handleSubmit,
@@ -13,9 +14,31 @@ const page = () => {
         reset,
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        toast.success("Successfully Added!");
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            const url = `https://antoapi.onrender.com/category`;
+            const option = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            };
+            const response = await fetch(url, option);
+            const res = await response.json();
+
+            if (res.status) {
+                toast.success("New Category Added!");
+                reset();
+                setIsLoading(false);
+                return;
+            }
+            toast.error(`Failed(${res.result})`);
+            setIsLoading(false);
+        } catch (error) {
+            toast.error(`Failed(${error.message})`);
+        }
     };
     return (
         <section className="page-container">
@@ -48,8 +71,12 @@ const page = () => {
                         )}
                     </div>
 
-                    <button className="submit" type="submit">
-                        save
+                    <button
+                        className="submit"
+                        type="submit"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "loading..." : "save"}
                     </button>
                 </form>
                 <div className="home-row">
