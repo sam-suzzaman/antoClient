@@ -79,24 +79,7 @@ a {
     border: 1px solid var(--white-clr);
     color: var(--white-clr);
 }
-/* 
-.modal-wrapper {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-wrapper .modal-content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-} */
+
 .form-card {
     background-color: var(--white-clr);
     padding: 2.5rem 1.5rem;
@@ -218,11 +201,11 @@ Main Menu Style
   Animal List Style
 -------------------------*/
 .animal-list {
-    margin-top: 3rem;
+    margin-top: 5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    row-gap: 2.75rem;
-    column-gap: 1.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 10rem));
+    justify-content: center;
+    gap: 2.75rem;
 }
 
 .animal-card .img-container {

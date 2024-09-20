@@ -5,7 +5,10 @@ import useGetHook from "@/hook/useGetHook";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-    const [selectedCategory, setSelectedCateogry] = useState(null);
+    const [selectedCategory, setSelectedCateogry] = useState({
+        _id: 1,
+        name: "all",
+    });
     const [fetchURL, setFetchURL] = useState(
         "https://antoapi.onrender.com/animal"
     );
@@ -26,22 +29,15 @@ export default function Home() {
         error: cateError,
     } = useGetHook(`https://antoapi.onrender.com/category`);
 
-    useEffect(() => {
-        setSelectedCateogry(categories?.[0]);
-    }, [categories]);
-
     // filter handler
     useEffect(() => {
-        // if (selectedCategory?.name == categories?.[0].name) {
-        //     setFetchURL(`https://antoapi.onrender.com/animal`);
-        // } else {
-        //     setFetchURL(
-        //         `https://antoapi.onrender.com/animal?category=${selectedCategory?.name}`
-        //     );
-        // }
-        setFetchURL(
-            `https://antoapi.onrender.com/animal?category=${selectedCategory?.name}`
-        );
+        if (selectedCategory?.name == "all") {
+            setFetchURL(`https://antoapi.onrender.com/animal`);
+        } else {
+            setFetchURL(
+                `https://antoapi.onrender.com/animal?category=${selectedCategory?.name}`
+            );
+        }
     }, [selectedCategory]);
 
     if (animalsLoading && cateLoading) {
