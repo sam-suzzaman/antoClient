@@ -37,6 +37,7 @@ const page = () => {
             toast.error(`Failed(${res.result})`);
             setIsLoading(false);
         } catch (error) {
+            setIsLoading(false)
             toast.error(`Failed(${error.message})`);
         }
     };

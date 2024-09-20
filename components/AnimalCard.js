@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import demo from "./demo.png";
 
 const AnimalCard = ({ animal }) => {
     const { _id, name, photo } = animal;

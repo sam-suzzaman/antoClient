@@ -1,10 +1,19 @@
 "use client";
+import useGetHook from "@/hook/useGetHook";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const page = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    // category list fetch
+    const {
+        isLoading: cateLoading,
+        data: categories,
+        isError: isCateError,
+        error: cateError,
+    } = useGetHook(`https://antoapi.onrender.com/category`);
     const {
         register,
         handleSubmit,
@@ -13,10 +22,43 @@ const page = () => {
         reset,
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        toast.success("Successfully Added!");
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            const photo = data.photo[0];
+            const formData = new FormData();
+            formData.append("name", data.name);
+            formData.append("category", data.category);
+            formData.append("photo", photo);
+            const option = {
+                method: "POST",
+                // headers: {
+                //     "content-type": "multipart/form-data",
+                // },
+                body: formData,
+            };
+            const url = `https://antoapi.onrender.com/animal`;
+            const response = await fetch(url, option);
+            const res = await response.json();
+            console.log(res);
+            if (res.status) {
+                toast.success("New Animal Added!");
+                reset();
+                setIsLoading(false);
+                return;
+            }
+            toast.error(`Failed(${res.result})`);
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+            toast.error(`Failed(${error.message})`);
+        }
     };
+
+    if (cateLoading) {
+        return <h2>Loading...</h2>;
+    }
     return (
         <section className="page-container">
             <div className="form-card">
@@ -68,8 +110,11 @@ const page = () => {
                             <option disabled value="none">
                                 select category
                             </option>
-                            <option value="a">option a</option>
-                            <option value="b">option b</option>
+                            {categories?.map((c) => (
+                                <option value={c?.name} key={c._id}>
+                                    {c?.name}
+                                </option>
+                            ))}
                         </select>
                         {errors.category && (
                             <span className="error">
@@ -101,7 +146,13 @@ const page = () => {
                             </span>
                         )}
                     </div>
-                    <button className="submit">create animal</button>
+                    <button
+                        className="submit"
+                        type="submit"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "loading..." : "save"}
+                    </button>
                 </form>
                 <div className="home-row">
                     <Link href="/">go back</Link>

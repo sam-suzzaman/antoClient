@@ -1,19 +1,20 @@
 import React from "react";
 
-const FilterBar = ({ categories }) => {
+const FilterBar = ({ categories, selectedCategory, setSelectedCateogry }) => {
     return (
         <ul className="menu">
             {categories?.map((category) => (
                 <li className="item" key={category._id}>
-                    <button className="link active">{category?.name}</button>
+                    <button
+                        className={`link ${
+                            selectedCategory?._id == category._id && "active"
+                        }`}
+                        onClick={() => setSelectedCateogry(category)}
+                    >
+                        {category?.name}
+                    </button>
                 </li>
             ))}
-            {/* <li className="item">
-                <button className="link active">cat</button>
-            </li>
-            <li className="item">
-                <button className="link">bird</button>
-            </li> */}
         </ul>
     );
 };
