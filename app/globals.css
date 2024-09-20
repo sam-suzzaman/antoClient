@@ -6,7 +6,7 @@
 }
 
 html {
-    font-size: 100%; /* default browser "font-size:16px" */
+    font-size: 100%;
 }
 
 :root {
@@ -38,6 +38,10 @@ a {
 
 .justify-end {
     justify-content: flex-end;
+}
+
+.d-none {
+    display: none;
 }
 
 /* -------------------------
@@ -122,9 +126,6 @@ a {
     transform: translateY(-50%);
 }
 
-.d-none {
-    display: none;
-}
 .form-card form .input-row input,
 .input,
 select {
@@ -177,6 +178,7 @@ select {
     color: var(--secondary-clr);
     text-decoration: underline;
 }
+
 /* ----------------------
 Main Menu Style
 -------------------------*/
