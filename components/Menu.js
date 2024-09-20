@@ -2,11 +2,11 @@ import React from "react";
 import FilterBar from "./FilterBar";
 import ActionBar from "./ActionBar";
 
-const Menu = () => {
+const Menu = ({ categories }) => {
     return (
         <nav className="main-menu-container">
             <div className="filter-bar">
-                <FilterBar />
+                <FilterBar categories={categories} />
             </div>
             <div className="action-bar">
                 <ActionBar />

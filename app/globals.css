@@ -143,7 +143,8 @@ a {
     display: none;
 }
 .form-card form .input-row input,
-.input {
+.input,
+select {
     font-size: 1rem;
     padding: 0.875rem 1rem;
     text-transform: capitalize;

@@ -2,13 +2,14 @@ import React from "react";
 import Image from "next/image";
 import demo from "./demo.png";
 
-const AnimalCard = () => {
+const AnimalCard = ({ animal }) => {
+    const { _id, name, photo } = animal;
     return (
         <div className="animal-card">
             <div className="img-container">
-                <Image src={demo} width={126} height={98} />
+                <Image src={photo} width={126} height={98} alt="thumb" />
             </div>
-            <h3 className="card-title">elephant</h3>
+            <h3 className="card-title">{name}</h3>
         </div>
     );
 };

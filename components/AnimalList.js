@@ -1,20 +1,12 @@
 import React from "react";
 import AnimalCard from "./AnimalCard";
 
-const AnimalList = () => {
+const AnimalList = ({ data }) => {
     return (
         <section className="animal-list">
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
-            <AnimalCard />
+            {data?.map((animal) => (
+                <AnimalCard key={animal._id} animal={animal} />
+            ))}
         </section>
     );
 };
